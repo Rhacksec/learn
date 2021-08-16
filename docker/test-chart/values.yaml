@@ -1,0 +1,5 @@
+image: rhacksec/lesson1:v0.2
+replicas: 2
+secret:
+  name: load-secret
+  password: loadqwerty

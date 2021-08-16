@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-web
+  namespace: lesson14
+  labels:
+    app: goweb
+spec:
+  containers:
+    - name: web
+      image: rhacksec/lesson1:v0.2
+      ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+      resources:
+        limits:
+          memory: 512Mi
+          cpu: "1"
+        requests:
+          memory: 256Mi
+          cpu: "0.2"      

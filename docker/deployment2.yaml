@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goapp-deployment
+  namespace: lesson15
+  labels:
+    app: goapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: goapp
+  template:
+    metadata:
+      labels:
+        app: goapp
+    spec:
+      containers:
+      - name: web
+        image: rhacksec/lesson1:v0.2
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: cm-volume
+            mountPath: "/etc/ssl/certs/"
+            readOnly: true
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+          requests:
+            memory: 256Mi
+            cpu: "0.2"
+      volumes:
+        - name: cm-volume
+          configMap:
+            name: test-config       
